@@ -17,6 +17,7 @@ const Header = () => {
       />
       <div>বাজার দর</div>
       <div>{date}</div>
+      <div>Profile</div>
     </div>
   );
 };
