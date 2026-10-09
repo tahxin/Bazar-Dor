@@ -32,7 +32,7 @@ export default function RootLayout({
       data-theme="light"
       className={`${notoSerifBengali.variable} h-full antialiased`}
     >
-      <body className="bg-[#f5f5f0] min-h-screen font-[family-name:var(--font-noto-serif-bengali)]">
+      <body className={`${notoSerifBengali.className} bg-[#f5f5f0] min-h-screen`}>
         {children}
         <Toaster
           position="top-right"

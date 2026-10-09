@@ -1,6 +1,5 @@
 "use client";
 
-import { useEffect, useState } from "react";
 import { Product } from "@/lib/types";
 import { formatPrice, unitLabel } from "@/lib/utils";
 
@@ -9,13 +8,9 @@ interface Props {
 }
 
 export default function PriceTicker({ products }: Props) {
-  const [items, setItems] = useState<Product[]>([]);
-
-  useEffect(() => {
-    setItems([...products, ...products]);
-  }, [products]);
-
   if (products.length === 0) return null;
+
+  const items = [...products, ...products];
 
   return (
     <div className="bg-gray-50 border-y border-gray-200 overflow-hidden py-2">

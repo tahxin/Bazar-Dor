@@ -136,9 +136,9 @@ export default function SignUpPage() {
           </div>
 
           <div className="relative flex py-2 items-center mb-6">
-            <div className="flex-grow border-t border-gray-200"></div>
-            <span className="flex-shrink mx-4 text-xs text-gray-400">অথবা ইমেল দিয়ে</span>
-            <div className="flex-grow border-t border-gray-200"></div>
+            <div className="grow border-t border-gray-200"></div>
+            <span className="shrink mx-4 text-xs text-gray-400">অথবা ইমেল দিয়ে</span>
+            <div className="grow border-t border-gray-200"></div>
           </div>
 
           <form onSubmit={handleSubmit} className="space-y-4">

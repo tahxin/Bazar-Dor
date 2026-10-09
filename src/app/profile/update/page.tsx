@@ -18,14 +18,15 @@ export default function UpdateProfilePage() {
     if (!isPending && !session) {
       toast.error("প্রোফাইল আপডেট করতে সাইন ইন করুন।");
       router.push("/signin");
-    } else if (session?.user?.name) {
-      setName(session.user.name);
     }
   }, [isPending, session, router]);
 
+  const currentName = name !== "" ? name : session?.user?.name || "";
+
   const handleSubmit = async (e: React.FormEvent) => {
     e.preventDefault();
-    if (!name.trim()) {
+    const finalName = currentName.trim();
+    if (!finalName) {
       toast.error("নামের ঘরটি খালি রাখা যাবে না।");
       return;
     }
@@ -33,7 +34,7 @@ export default function UpdateProfilePage() {
     setLoading(true);
     try {
       const res = await authClient.updateUser({
-        name: name.trim(),
+        name: finalName,
       });
 
       if (res?.error) {
@@ -106,7 +107,7 @@ export default function UpdateProfilePage() {
                 id="update-name-input"
                 type="text"
                 required
-                value={name}
+                value={currentName}
                 onChange={(e) => setName(e.target.value)}
                 placeholder="নতুন নাম লিখুন"
                 className="w-full px-4 py-2.5 rounded-xl border border-gray-200 text-sm text-gray-900 focus:outline-none focus:ring-2 focus:ring-[#047F39] focus:border-transparent"

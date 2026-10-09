@@ -4,9 +4,9 @@ import { useState, useEffect } from "react";
 import { useParams } from "next/navigation";
 import Link from "next/link";
 import CommodityCard from "@/components/CommodityCard";
-import CardSkeleton from "@/components/CardSkeleton";
 import CategoryPageSkeleton from "@/components/CategoryPageSkeleton";
 import { Product, Category } from "@/lib/types";
+import { fetchCategoryBySlug, fetchProductsByCategory } from "@/lib/api";
 
 type SortMode = "default" | "price-asc" | "price-desc";
 
@@ -22,62 +22,29 @@ export default function CategoryPage() {
 
   useEffect(() => {
     if (!slug) return;
-    setLoading(true);
-    setNotFound(false);
 
-    Promise.all([
-      fetch(`https://api.api-store.workers.dev/api/bazardor/categories/${slug}`).then((r) =>
-        r.ok ? r.json() : null
-      ),
-      fetch(`https://api.api-store.workers.dev/api/bazardor/products?category=${slug}`).then((r) =>
-        r.ok ? r.json() : []
-      ),
-    ])
-      .then(([cat, prods]) => {
+    async function loadData() {
+      try {
+        const [cat, prods] = await Promise.all([
+          fetchCategoryBySlug(slug),
+          fetchProductsByCategory(slug),
+        ]);
+
         if (!cat) {
           setNotFound(true);
           return;
         }
+
         setCategory(cat);
-        const list = Array.isArray(prods) ? prods : [];
-        setProducts(
-          list.map((raw: {
-            id: number;
-            slug: string;
-            nameBn: string;
-            category: string;
-            categoryNameBn: string;
-            categoryIcon: string;
-            unit: string;
-            image: string;
-            today: number;
-            yesterday: number;
-            lastWeek: number;
-            lastMonth: number;
-            change: { dir: "up" | "down" | "flat"; pct: number };
-            markets: { market: string; division: string; min: number; max: number }[];
-          }) => ({
-            id: raw.id,
-            slug: raw.slug,
-            name: raw.nameBn,
-            unit: raw.unit,
-            price: raw.today,
-            yesterday: raw.yesterday,
-            lastWeek: raw.lastWeek,
-            lastMonth: raw.lastMonth,
-            image: raw.image ?? "",
-            categoryIcon: raw.categoryIcon ?? "",
-            category: raw.category,
-            categoryNameBn: raw.categoryNameBn,
-            change: Math.abs(raw.change?.pct ?? 0),
-            is_increase: raw.change?.dir === "up",
-            dir: raw.change?.dir ?? "flat",
-            markets: raw.markets ?? [],
-          }))
-        );
-      })
-      .catch(() => setNotFound(true))
-      .finally(() => setLoading(false));
+        setProducts(prods);
+      } catch {
+        setNotFound(true);
+      } finally {
+        setLoading(false);
+      }
+    }
+
+    loadData();
   }, [slug]);
 
   const sorted = [...products].sort((a, b) => {

@@ -1,6 +1,6 @@
 export default function HeroSection() {
   return (
-    <section className="bg-gradient-to-br from-[#f0faf4] to-[#e8f5ed] rounded-3xl my-6 px-8 py-12 flex flex-col lg:flex-row-reverse items-center gap-10 border border-[#d0ead8]">
+    <section className="bg-linear-to-br from-[#f0faf4] to-[#e8f5ed] rounded-3xl my-6 px-8 py-12 flex flex-col lg:flex-row-reverse items-center gap-10 border border-[#d0ead8]">
       <div className="shrink-0 flex items-center justify-center">
         <div className="w-56 h-56 lg:w-72 lg:h-72 rounded-full bg-white/60 flex items-center justify-center text-9xl shadow-xl border border-[#c5e6cf]">
           🧺

@@ -7,7 +7,7 @@ export default function Loading() {
     <div className="min-h-screen bg-[#f5f5f0]">
       <Header />
       <main className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 pb-8">
-        <div className="bg-gradient-to-br from-[#f0faf4] to-[#e8f5ed] rounded-3xl my-6 px-8 py-12 flex flex-col lg:flex-row-reverse items-center gap-10 border border-[#d0ead8] animate-pulse">
+        <div className="bg-linear-to-br from-[#f0faf4] to-[#e8f5ed] rounded-3xl my-6 px-8 py-12 flex flex-col lg:flex-row-reverse items-center gap-10 border border-[#d0ead8] animate-pulse">
           <div className="w-56 h-56 lg:w-72 lg:h-72 rounded-full bg-white/60" />
           <div className="flex-1 space-y-4">
             <div className="h-6 bg-gray-200 rounded-full w-48" />

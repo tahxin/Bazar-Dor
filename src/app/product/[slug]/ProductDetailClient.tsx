@@ -7,6 +7,7 @@ import toast from "react-hot-toast";
 import { useSession } from "@/lib/auth-client";
 import { Product } from "@/lib/types";
 import { formatPrice, unitLabel } from "@/lib/utils";
+import { fetchProductBySlug } from "@/lib/api";
 import ProductDetailSkeleton from "@/components/ProductDetailSkeleton";
 
 export default function ProductDetailClient() {
@@ -28,74 +29,23 @@ export default function ProductDetailClient() {
 
   useEffect(() => {
     if (!slug) return;
-    setLoading(true);
-    setNotFound(false);
 
-    const load = async () => {
+    async function loadProduct() {
       try {
-        let raw: {
-          id: number;
-          slug: string;
-          nameBn: string;
-          unit: string;
-          today: number;
-          yesterday: number;
-          lastWeek: number;
-          lastMonth: number;
-          image?: string;
-          categoryIcon?: string;
-          category: string;
-          categoryNameBn: string;
-          change?: { dir: "up" | "down" | "flat"; pct: number };
-          markets?: { market: string; division: string; min: number; max: number }[];
-        } | null = null;
-
-        const res = await fetch(`https://api.api-store.workers.dev/api/bazardor/products/${slug}`);
-        if (res.ok) {
-          raw = await res.json();
+        const data = await fetchProductBySlug(slug);
+        if (data) {
+          setProduct(data);
         } else {
-          const allRes = await fetch("https://api.api-store.workers.dev/api/bazardor/products");
-          if (allRes.ok) {
-            const list = await allRes.json();
-            const found = list.find((x: { slug: string; id: number }) => x.slug === slug || String(x.id) === slug);
-            if (found) {
-              const singleRes = await fetch(`https://api.api-store.workers.dev/api/bazardor/products/${found.id}`);
-              raw = singleRes.ok ? await singleRes.json() : found;
-            }
-          }
-        }
-
-        if (!raw) {
           setNotFound(true);
-          return;
         }
-
-        setProduct({
-          id: raw.id,
-          slug: raw.slug,
-          name: raw.nameBn,
-          unit: raw.unit,
-          price: raw.today,
-          yesterday: raw.yesterday,
-          lastWeek: raw.lastWeek,
-          lastMonth: raw.lastMonth,
-          image: raw.image ?? "",
-          categoryIcon: raw.categoryIcon ?? "",
-          category: raw.category,
-          categoryNameBn: raw.categoryNameBn,
-          change: Math.abs(raw.change?.pct ?? 0),
-          is_increase: raw.change?.dir === "up",
-          dir: raw.change?.dir ?? "flat",
-          markets: raw.markets ?? [],
-        });
       } catch {
         setNotFound(true);
       } finally {
         setLoading(false);
       }
-    };
+    }
 
-    load();
+    loadProduct();
   }, [slug]);
 
   if (isPending || !session || loading) {
