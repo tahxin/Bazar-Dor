@@ -1,50 +1,51 @@
-# বাজার দর / BazarDor
+# BazarDor (বাজার দর)
 
-বাজার দর (BazarDor) হলো বাংলাদেশের নিত্যপ্রয়োজনীয় পণ্যের দৈনন্দিন বাজারদর পর্যবেক্ষণ ও তুলনামূলক বিশ্লেষণের একটি আধুনিক প্ল্যাটফর্ম। চাল, ডাল, তেল, সবজি, মাছ, মাংস, ডিম ও মসলার নির্ভরযোগ্য ও আপ-টু-ডেট বাজারদর সহজেই এক নজরে পাওয়া যায়।
-
----
-
-## 🛠️ ব্যবহৃত প্রযুক্তিসমূহ (Technologies Used)
-
-- **Next.js 16 (App Router)**: আধুনিক ও দ্রুতগতির ফুলস্ট্যাক ফ্রেমওয়ার্ক
-- **TypeScript**: টাইপ-নিরাপদ ও নির্ভরযোগ্য কোডবেজ
-- **Tailwind CSS & DaisyUI**: মার্জিত, রেসপন্সিভ এবং আধুনিক ডিজাইন
-- **BetterAuth**: সুরক্ষিত অথেন্টিকেশন সিস্টেম (ইমেল/পাসওয়ার্ড ও সোশ্যাল ওঅথ)
-- **MongoDB & MongoDB Adapter**: ইউজার ডেটা সংরক্ষণের জন্য ডেটাবেস
-- **React Hot Toast**: সুন্দর ও প্রতিক্রিয়াশীল নোটিফিকেশন সিস্টেম
+BazarDor is a modern web application designed for tracking and analyzing daily essential commodity prices across Bangladesh. It provides transparent, real-time insights into market prices for rice, lentils, oil, vegetables, fish, meat, eggs, and spices, featuring historical trends, division-wise market breakdowns, and price fluctuation tracking.
 
 ---
 
-## ✨ প্রধান ৫টি বৈশিষ্ট্য (Key Features)
+## 🛠️ Technologies Used
 
-1. **রিয়েল-টাইম বাজারদর ও মারকুই প্রাইস টিকার (Live Price Ticker & Market Insights)**  
-   হেডারে চলমান ইনফিনিট মারকুই টিকারে পণ্যের আজকের দর এবং উত্থান-পতনের হার (▲ / ▼) তাৎক্ষণিকভাবে দেখা যায়।
-
-2. **উত্থান-পতন ও সব পণ্যের বিভাগ (Top Risers, Fallers & All Products)**  
-   হোম পেজে আজ দাম বেড়েছে ও আজ দাম কমেছে এমন শীর্ষ পণ্যের পৃথক সেকশন এবং সব পণ্যের বিস্তারিত তালিকা প্রদর্শিত হয়।
-
-3. **বিভাগভিত্তিক ব্রাউজিং ও সংখ্যাভিত্তিক সর্টিং (Categorized Navigation & Numeric Sorting)**  
-   চাল, ডাল, তেল ইত্যাদি ক্যাটাগরিভিত্তিক ফিল্টারিং এবং দাম অনুযায়ী (কম থেকে বেশি, বেশি থেকে কম) নির্ভুল নিউমেরিক সর্টিং সুবিধা।
-
-4. **বাজারভিত্তিক মূল্য বিশ্লেষণ ও ইতিহাস (Market-wise Breakdown & Historical Trends)**  
-   প্রতিটি পণ্যের সর্বনিম্ন, সর্বাধিক এবং গড় মূল্য এবং ঢাকা, চট্টগ্রামসহ বিভিন্ন বিভাগের বাজারভিত্তিক দামের পুঙ্খানুপুঙ্খ বিবরণ।
-
-5. **সুরক্ষিত অথেন্টিকেশন ও প্রোফাইল আপডেট (BetterAuth, MongoDB & Profile Management)**  
-   লগইন, রেজিস্ট্রেশন ও সোশ্যাল লগইনের সুবিধা এবং ব্যবহারকারীর নাম ও প্রোফাইল তথ্য সরাসরি আপডেটের ব্যবস্থা।
+- **Next.js 16 (App Router)**: High-performance React framework with Partial Prerendering and streaming SSR
+- **TypeScript**: End-to-end type safety and maintainable codebase
+- **Tailwind CSS & DaisyUI**: Responsive, accessible, and modern user interface styling
+- **Better Auth**: Authentication system supporting email/password and social OAuth providers
+- **MongoDB & @better-auth/mongo-adapter**: Scalable database for user profiles and authentication sessions
+- **React Hot Toast**: Real-time interactive toast notifications for user actions
 
 ---
 
-## 🚀 সেটআপ ও ইনস্টলেশন (Getting Started)
+## ✨ 5 Key Features
 
-### ১. ডিপেন্ডেন্সি ইনস্টল করুন
+1. **Live Infinite Marquee Price Ticker**  
+   A continuous scrolling ticker beneath the navbar displays real-time price updates and percentage changes (▲ / ▼) for daily essential commodities.
+
+2. **Top Risers, Fallers & Full Catalog**  
+   Dedicated homepage sections highlight the top 6 price risers and top 6 price fallers of the day, followed by a responsive grid showcasing all commodities.
+
+3. **Category Navigation & Accurate Numeric Sorting**  
+   Fast category-based filtering (Rice, Lentils, Oil, Vegetables, Fish, Meat, Eggs, Spices) with numeric price sorting (Default, Low to High, High to Low) properly evaluating numeric values regardless of Bengali numeral rendering.
+
+4. **Division & Market-Wise Detailed Breakdown**  
+   Protected product detail pages provide market summaries, minimum, maximum, and average prices, historical trends (today, yesterday, last week, last month), and granular price comparisons grouped by administrative division.
+
+5. **Authentication, Profile Management & Skeleton Loading**  
+   Complete authentication flow with protected routes, social login readiness (Google & GitHub), dynamic profile information updates via Better Auth, and animated skeleton loaders across every route transition.
+
+---
+
+## 🚀 Getting Started
+
+### 1. Install Dependencies
 ```bash
 npm install
 ```
 
-### ২. এনভায়রনমেন্ট ভেরিয়েবল সেটআপ
-প্রজেক্টের রুট ডিরেক্টরিতে `.env` ফাইলটিতে আপনার ক্রেডেনশিয়াল প্রদান করুন:
+### 2. Configure Environment Variables
+Create a `.env` file in the root directory and add your credentials:
 ```env
 MONGODB_URI=your_mongodb_connection_string
+MONGODB_DB_NAME=better-auth-db
 BETTER_AUTH_SECRET=your_better_auth_secret
 BETTER_AUTH_URL=http://localhost:3000
 NEXT_PUBLIC_APP_URL=http://localhost:3000
@@ -54,9 +55,15 @@ GITHUB_CLIENT_ID=your_github_client_id
 GITHUB_CLIENT_SECRET=your_github_client_secret
 ```
 
-### ৩. ডেভেলপমেন্ট সার্ভার চালু করুন
+### 3. Run Development Server
 ```bash
 npm run dev
 ```
 
-ব্রাউজারে [http://localhost:3000](http://localhost:3000) ওপেন করে প্রজেক্টটি দেখুন।
+Open [http://localhost:3000](http://localhost:3000) in your browser to view the application.
+
+### 4. Build for Production
+```bash
+npm run build
+npm run start
+```
