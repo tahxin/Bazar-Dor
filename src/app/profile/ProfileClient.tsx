@@ -35,7 +35,8 @@ export default function ProfileClient() {
     setSigningOut(true);
     await signOut();
     toast.success("সফলভাবে সাইন আউট হয়েছেন।");
-    window.location.href = "/";
+    router.push("/");
+    router.refresh();
   };
 
   return (

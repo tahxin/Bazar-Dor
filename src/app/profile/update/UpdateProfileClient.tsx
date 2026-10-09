@@ -41,7 +41,8 @@ export default function UpdateProfileClient() {
         toast.error(res.error.message || "তথ্য আপডেট করতে সমস্যা হয়েছে।");
       } else {
         toast.success("তথ্য সফলভাবে আপডেট করা হয়েছে!");
-        window.location.href = "/profile";
+        router.push("/profile");
+        router.refresh();
       }
     } catch {
       toast.error("তথ্য আপডেট করতে ব্যর্থ হয়েছে। আবার চেষ্টা করুন।");
