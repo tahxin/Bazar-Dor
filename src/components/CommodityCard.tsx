@@ -1,67 +1,59 @@
 import React from "react";
-import { Product } from "./AllProducts";
-
-// Convert English digits to Bengali digits
-function toBengaliNumber(num: string | number): string {
-  const digits: Record<string, string> = {
-    "0": "০", "1": "১", "2": "২", "3": "৩", "4": "৪",
-    "5": "৫", "6": "৬", "7": "৭", "8": "৮", "9": "৯",
-  };
-  return String(num).replace(/[0-9]/g, (d) => digits[d]);
-}
+import Link from "next/link";
+import { Product } from "@/lib/types";
+import { formatPrice, unitLabel } from "@/lib/utils";
 
 export default function CommodityCard({ product }: { product: Product }) {
-  const isFlat = product.change === 0;
+  const isFlat = product.dir === "flat";
 
   return (
-    <div className="bg-base-100 border border-base-200 rounded-3xl p-6 shadow-sm hover:shadow-md transition-shadow duration-200 flex flex-col justify-between w-full">
-
-      {/* Product name & icon */}
-      <div className="flex items-center gap-4">
-        <div className="w-16 h-16 rounded-2xl bg-white border border-base-200 flex items-center justify-center text-3xl shrink-0">
+    <Link
+      href={`/product/${product.slug}`}
+      className="group bg-white border border-gray-100 rounded-2xl p-5 shadow-sm hover:shadow-md transition-all duration-200 hover:-translate-y-0.5 flex flex-col justify-between w-full"
+    >
+      <div className="flex items-center gap-3">
+        <div className="w-14 h-14 rounded-xl bg-gray-50 border border-gray-100 flex items-center justify-center text-2xl shrink-0">
           {product.image || product.categoryIcon || "🛒"}
         </div>
         <div>
-          <h3 className="text-xl font-bold text-base-content tracking-tight leading-snug">
+          <h3 className="text-base font-bold text-gray-900 leading-snug group-hover:text-[#047F39] transition-colors">
             {product.name}
           </h3>
-          <p className="text-sm text-base-content/60 font-medium">{product.unit}</p>
+          <p className="text-xs text-gray-400 font-medium mt-0.5">{unitLabel(product.unit)}</p>
         </div>
       </div>
 
-      {/* Price & change badge */}
-      <div className="mt-8 flex items-end justify-between">
+      <div className="mt-5 flex items-end justify-between">
         <div>
-          <span className="block text-sm text-base-content/60 font-medium mb-1">
+          <span className="block text-xs text-gray-400 font-medium mb-0.5">
             আজকের দাম
           </span>
-          <div className="text-2xl font-extrabold text-base-content">
-            {toBengaliNumber(product.price)}{" "}
-            <span className="text-lg font-bold">টাকা</span>
+          <div className="text-xl font-extrabold text-gray-900">
+            {formatPrice(product.price)}{" "}
+            <span className="text-sm font-bold text-gray-600">টাকা</span>
           </div>
         </div>
 
-        {/* Up = green, Down = red, Flat = gray */}
         {!isFlat && (
           <div
-            className={`flex items-center gap-1 text-sm font-semibold px-2 py-0.5 rounded-md ${
+            className={`flex items-center gap-1 text-xs font-semibold px-2.5 py-1 rounded-full ${
               product.is_increase
-                ? "text-emerald-600 bg-emerald-50"
-                : "text-red-500 bg-red-50"
+                ? "text-emerald-700 bg-emerald-50"
+                : "text-red-600 bg-red-50"
             }`}
           >
-            <span className="text-xs">{product.is_increase ? "▲" : "▼"}</span>
-            <span>{toBengaliNumber(product.change)}%</span>
+            <span>{product.is_increase ? "▲" : "▼"}</span>
+            <span>{product.change.toFixed(1)}%</span>
           </div>
         )}
 
         {isFlat && (
-          <div className="flex items-center gap-1 text-sm font-semibold px-2 py-0.5 rounded-md text-gray-500 bg-gray-100">
-            <span className="text-xs">—</span>
-            <span>অপরিবর্তিত</span>
+          <div className="flex items-center gap-1 text-xs font-semibold px-2.5 py-1 rounded-full text-gray-500 bg-gray-100">
+            <span>—</span>
+            <span>০.০%</span>
           </div>
         )}
       </div>
-    </div>
+    </Link>
   );
 }
