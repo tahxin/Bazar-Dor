@@ -28,13 +28,47 @@ export default function ProductDetailClient() {
   useEffect(() => {
     if (!slug) return;
     setLoading(true);
-    fetch(`https://api.api-store.workers.dev/api/bazardor/products/${slug}`)
-      .then((r) => (r.ok ? r.json() : null))
-      .then((raw) => {
+    setNotFound(false);
+
+    const load = async () => {
+      try {
+        let raw: {
+          id: number;
+          slug: string;
+          nameBn: string;
+          unit: string;
+          today: number;
+          yesterday: number;
+          lastWeek: number;
+          lastMonth: number;
+          image?: string;
+          categoryIcon?: string;
+          category: string;
+          categoryNameBn: string;
+          change?: { dir: "up" | "down" | "flat"; pct: number };
+          markets?: { market: string; division: string; min: number; max: number }[];
+        } | null = null;
+
+        const res = await fetch(`https://api.api-store.workers.dev/api/bazardor/products/${slug}`);
+        if (res.ok) {
+          raw = await res.json();
+        } else {
+          const allRes = await fetch("https://api.api-store.workers.dev/api/bazardor/products");
+          if (allRes.ok) {
+            const list = await allRes.json();
+            const found = list.find((x: { slug: string; id: number }) => x.slug === slug || String(x.id) === slug);
+            if (found) {
+              const singleRes = await fetch(`https://api.api-store.workers.dev/api/bazardor/products/${found.id}`);
+              raw = singleRes.ok ? await singleRes.json() : found;
+            }
+          }
+        }
+
         if (!raw) {
           setNotFound(true);
           return;
         }
+
         setProduct({
           id: raw.id,
           slug: raw.slug,
@@ -53,9 +87,14 @@ export default function ProductDetailClient() {
           dir: raw.change?.dir ?? "flat",
           markets: raw.markets ?? [],
         });
-      })
-      .catch(() => setNotFound(true))
-      .finally(() => setLoading(false));
+      } catch {
+        setNotFound(true);
+      } finally {
+        setLoading(false);
+      }
+    };
+
+    load();
   }, [slug]);
 
   if (isPending || !session) {

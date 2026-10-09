@@ -144,16 +144,23 @@ export default function CategoryPage() {
         <p className="text-sm text-gray-500">মোট {products.length} টি পণ্য দেখানো হচ্ছে</p>
         <div className="flex items-center gap-2">
           <span className="text-sm text-gray-600 font-medium">সাজান:</span>
-          <select
-            id="category-sort"
-            value={sort}
-            onChange={(e) => setSort(e.target.value as SortMode)}
-            className="text-sm border border-gray-200 rounded-lg px-3 py-1.5 bg-white text-gray-700 focus:outline-none focus:ring-2 focus:ring-[#047F39] cursor-pointer"
-          >
-            <option value="default">ডিফল্ট</option>
-            <option value="price-asc">দাম: কম থেকে বেশি</option>
-            <option value="price-desc">দাম: বেশি থেকে কম</option>
-          </select>
+          <div className="relative inline-block">
+            <select
+              id="category-sort"
+              value={sort}
+              onChange={(e) => setSort(e.target.value as SortMode)}
+              className="text-sm border border-gray-200 rounded-lg pl-3 pr-8 py-1.5 bg-white text-gray-700 appearance-none focus:outline-none focus:ring-2 focus:ring-[#047F39] cursor-pointer"
+            >
+              <option value="default">ডিফল্ট</option>
+              <option value="price-asc">দাম: কম থেকে বেশি</option>
+              <option value="price-desc">দাম: বেশি থেকে কম</option>
+            </select>
+            <div className="pointer-events-none absolute inset-y-0 right-0 flex items-center px-2 text-gray-500">
+              <svg className="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                <path strokeLinecap="round" strokeLinejoin="round" strokeWidth="2" d="M19 9l-7 7-7-7" />
+              </svg>
+            </div>
+          </div>
         </div>
       </div>
 

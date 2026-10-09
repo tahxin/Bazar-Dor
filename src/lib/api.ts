@@ -58,7 +58,17 @@ export async function fetchProductBySlug(slug: string): Promise<Product | null> 
     if (data && typeof data === "object" && !Array.isArray(data)) {
       return normaliseProduct(data as ApiProduct);
     }
-    return null;
+  } catch {
+  }
+  try {
+    const all = await fetchAllProducts();
+    const found = all.find((p) => p.slug === slug || String(p.id) === slug);
+    if (!found) return null;
+    const single = await fetchWithFallback(`/products/${found.id}`);
+    if (single && typeof single === "object" && !Array.isArray(single)) {
+      return normaliseProduct(single as ApiProduct);
+    }
+    return found;
   } catch {
     return null;
   }
