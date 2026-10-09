@@ -1,6 +1,6 @@
 import React from "react";
 import Link from "next/link";
-import { Product } from "@/lib/types";
+import { Product } from "@/types";
 import { formatPrice, unitLabel } from "@/lib/utils";
 
 export default function CommodityCard({ product }: { product: Product }) {

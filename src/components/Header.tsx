@@ -33,7 +33,9 @@ export default async function Header() {
               <Link href="/" className="text-lg font-extrabold text-gray-900 leading-none">
                 বাজার দর
               </Link>
-              <HeaderDate />
+              <Suspense fallback={<p className="text-xs text-gray-400 font-medium leading-tight h-4" />}>
+                <HeaderDate />
+              </Suspense>
             </div>
           </div>
 

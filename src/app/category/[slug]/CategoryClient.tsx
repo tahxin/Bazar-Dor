@@ -5,10 +5,8 @@ import { useParams } from "next/navigation";
 import Link from "next/link";
 import CommodityCard from "@/components/CommodityCard";
 import CategoryPageSkeleton from "@/components/CategoryPageSkeleton";
-import { Product, Category } from "@/lib/types";
+import { Product, Category, SortMode } from "@/types";
 import { fetchCategoryBySlug, fetchProductsByCategory } from "@/lib/api";
-
-type SortMode = "default" | "price-asc" | "price-desc";
 
 export default function CategoryPage() {
   const params = useParams();

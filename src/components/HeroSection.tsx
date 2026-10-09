@@ -1,3 +1,6 @@
+import { Suspense } from "react";
+import BannerDate from "./BannerDate";
+
 export default function HeroSection() {
   return (
     <section className="bg-linear-to-br from-[#f0faf4] to-[#e8f5ed] rounded-3xl my-6 px-8 py-12 flex flex-col lg:flex-row-reverse items-center gap-10 border border-[#d0ead8]">
@@ -8,9 +11,16 @@ export default function HeroSection() {
       </div>
 
       <div className="flex-1">
-        <span className="inline-block text-xs font-semibold tracking-widest text-[#047F39] uppercase bg-[#e0f2e9] px-3 py-1 rounded-full mb-4">
-          আজকের বাজার • সর্বশেষ আপডেট
-        </span>
+        <Suspense
+          fallback={
+            <span className="inline-flex items-center gap-1.5 text-xs font-semibold tracking-wide text-[#047F39] bg-[#e0f2e9] px-3 py-1 rounded-full mb-4">
+              <span>📅</span>
+              <span>আজকের তারিখ</span>
+            </span>
+          }
+        >
+          <BannerDate />
+        </Suspense>
 
         <h1 className="text-4xl lg:text-5xl font-extrabold text-gray-900 leading-tight mb-4">
           আজকের বাজারের<br />

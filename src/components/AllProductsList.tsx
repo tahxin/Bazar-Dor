@@ -2,9 +2,7 @@
 
 import { useState } from "react";
 import CommodityCard from "./CommodityCard";
-import { Product } from "@/lib/types";
-
-type SortMode = "default" | "price-asc" | "price-desc";
+import { Product, SortMode } from "@/types";
 
 export default function AllProductsList({ products }: { products: Product[] }) {
   const [sort, setSort] = useState<SortMode>("default");

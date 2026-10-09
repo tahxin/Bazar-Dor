@@ -1,11 +1,11 @@
 "use client";
 
-import { useEffect, useState } from "react";
+import { useEffect, useState, useRef } from "react";
 import { useParams, useRouter } from "next/navigation";
 import Link from "next/link";
 import toast from "react-hot-toast";
 import { useSession } from "@/lib/auth-client";
-import { Product } from "@/lib/types";
+import { Product } from "@/types";
 import { formatPrice, unitLabel } from "@/lib/utils";
 import { fetchProductBySlug } from "@/lib/api";
 import ProductDetailSkeleton from "@/components/ProductDetailSkeleton";
@@ -15,17 +15,20 @@ export default function ProductDetailClient() {
   const router = useRouter();
   const slug = params?.slug as string;
   const { data: session, isPending } = useSession();
+  const redirectedRef = useRef(false);
 
   const [product, setProduct] = useState<Product | null>(null);
   const [loading, setLoading] = useState(true);
   const [notFound, setNotFound] = useState(false);
 
   useEffect(() => {
-    if (!isPending && !session) {
-      toast.error("এই পেজটি দেখতে সাইন ইন করুন।");
-      router.push("/signin");
+    if (!isPending && !session && !redirectedRef.current) {
+      redirectedRef.current = true;
+      toast.error("এই পেজটি দেখতে সাইন ইন করুন।", { id: "auth-required" });
+      const returnUrl = slug ? `/product/${slug}` : "/";
+      router.push(`/signin?callbackURL=${encodeURIComponent(returnUrl)}`);
     }
-  }, [isPending, session, router]);
+  }, [isPending, session, router, slug]);
 
   useEffect(() => {
     if (!slug) return;
@@ -68,13 +71,34 @@ export default function ProductDetailClient() {
     );
   }
 
-  const allMins = product.markets.map((m) => m.min);
-  const allMaxs = product.markets.map((m) => m.max);
-  const minPrice = allMins.length ? Math.min(...allMins) : product.price;
-  const maxPrice = allMaxs.length ? Math.max(...allMaxs) : product.price;
-  const avgPrice = allMins.length
-    ? Math.round([...allMins, ...allMaxs].reduce((a, b) => a + b, 0) / (allMins.length + allMaxs.length))
-    : product.price;
+  let minPrice = product.price;
+  let maxPrice = product.price;
+  let avgPrice = product.price;
+
+  if (product.markets && product.markets.length > 0) {
+    let total = 0;
+    let count = 0;
+    minPrice = product.markets[0].min;
+    maxPrice = product.markets[0].max;
+
+    for (const m of product.markets) {
+      if (m.min < minPrice) minPrice = m.min;
+      if (m.max > maxPrice) maxPrice = m.max;
+      total += m.min + m.max;
+      count += 2;
+    }
+    if (count > 0) {
+      avgPrice = Math.round(total / count);
+    }
+  }
+
+  const marketsByDivision: { [division: string]: typeof product.markets } = {};
+  for (const m of product.markets) {
+    if (!marketsByDivision[m.division]) {
+      marketsByDivision[m.division] = [];
+    }
+    marketsByDivision[m.division].push(m);
+  }
 
   const isFlat = product.dir === "flat";
 
@@ -162,12 +186,7 @@ export default function ProductDetailClient() {
             <p className="text-xs text-gray-400 mt-0.5">{product.markets.length}টি বাজারের তথ্য</p>
           </div>
 
-          {Object.entries(
-            product.markets.reduce<Record<string, typeof product.markets>>((acc, m) => {
-              (acc[m.division] ??= []).push(m);
-              return acc;
-            }, {})
-          ).map(([division, markets]) => (
+          {Object.entries(marketsByDivision).map(([division, markets]) => (
             <div key={division}>
               <div className="px-6 py-2 bg-gray-50 border-b border-gray-100">
                 <p className="text-xs font-semibold text-gray-500 uppercase tracking-wide">{division}</p>

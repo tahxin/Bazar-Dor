@@ -31,8 +31,9 @@ export default function RootLayout({
       lang="bn"
       data-theme="light"
       className={`${notoSerifBengali.variable} h-full antialiased`}
+      suppressHydrationWarning
     >
-      <body className={`${notoSerifBengali.className} bg-[#f5f5f0] min-h-screen`}>
+      <body className={`${notoSerifBengali.className} bg-[#f5f5f0] min-h-screen`} suppressHydrationWarning>
         {children}
         <Toaster
           position="top-right"
