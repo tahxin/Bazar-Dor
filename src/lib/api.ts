@@ -7,7 +7,8 @@ async function fetchWithFallback(path: string): Promise<unknown> {
   try {
     const res = await fetch(`${BASE}${path}`, { next: { revalidate: 300 } });
     if (res.ok) return res.json();
-  } catch {/* try alt */}
+  } catch {
+  }
   const res = await fetch(`${ALT}${path}`, { next: { revalidate: 300 } });
   if (!res.ok) throw new Error(`HTTP ${res.status}`);
   return res.json();

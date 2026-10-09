@@ -1,5 +1,3 @@
-// ─── Raw API shapes ────────────────────────────────────────────────────────
-
 export interface MarketPrice {
   market: string;
   division: string;
@@ -34,14 +32,12 @@ export interface ApiCategory {
   icon: string;
 }
 
-// ─── Normalised shapes used throughout the app ────────────────────────────
-
 export interface Product {
   id: number;
   slug: string;
   name: string;
   unit: string;
-  price: number;       // today
+  price: number;
   yesterday: number;
   lastWeek: number;
   lastMonth: number;
@@ -49,7 +45,7 @@ export interface Product {
   categoryIcon: string;
   category: string;
   categoryNameBn: string;
-  change: number;      // absolute pct
+  change: number;
   is_increase: boolean;
   dir: "up" | "down" | "flat";
   markets: MarketPrice[];
@@ -62,7 +58,6 @@ export interface Category {
   icon: string;
 }
 
-// ─── Unit label map ───────────────────────────────────────────────────────
 export const UNIT_LABEL: Record<string, string> = {
   kg: "প্রতি কেজি",
   litre: "প্রতি লিটার",
