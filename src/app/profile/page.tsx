@@ -7,6 +7,7 @@ import Link from "next/link";
 import toast from "react-hot-toast";
 import Header from "@/components/Header";
 import Footer from "@/components/Footer";
+import ProfileSkeleton from "@/components/ProfileSkeleton";
 import { useSession, signOut } from "@/lib/auth-client";
 
 export default function ProfilePage() {
@@ -24,8 +25,8 @@ export default function ProfilePage() {
     return (
       <div className="min-h-screen bg-[#f5f5f0] flex flex-col">
         <Header />
-        <main className="flex-1 flex items-center justify-center py-20">
-          <div className="w-8 h-8 border-4 border-[#047F39] border-t-transparent rounded-full animate-spin" />
+        <main className="flex-1">
+          <ProfileSkeleton />
         </main>
         <Footer />
       </div>

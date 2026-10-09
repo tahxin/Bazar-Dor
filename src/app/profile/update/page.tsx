@@ -54,8 +54,22 @@ export default function UpdateProfilePage() {
     return (
       <div className="min-h-screen bg-[#f5f5f0] flex flex-col">
         <Header />
-        <main className="flex-1 flex items-center justify-center py-20">
-          <div className="w-8 h-8 border-4 border-[#047F39] border-t-transparent rounded-full animate-spin" />
+        <main className="flex-1 max-w-lg w-full mx-auto px-4 py-12 animate-pulse">
+          <div className="bg-white rounded-3xl p-8 border border-gray-100 shadow-sm space-y-6">
+            <div className="space-y-2">
+              <div className="h-4 bg-gray-200 rounded w-28" />
+              <div className="h-7 bg-gray-200 rounded w-44" />
+              <div className="h-4 bg-gray-100 rounded w-60" />
+            </div>
+            <div className="space-y-2">
+              <div className="h-3 bg-gray-200 rounded w-20" />
+              <div className="h-11 bg-gray-100 rounded-xl w-full" />
+            </div>
+            <div className="flex gap-3 pt-2">
+              <div className="h-11 bg-gray-200 rounded-xl flex-1" />
+              <div className="h-11 bg-gray-100 rounded-xl w-20" />
+            </div>
+          </div>
         </main>
         <Footer />
       </div>

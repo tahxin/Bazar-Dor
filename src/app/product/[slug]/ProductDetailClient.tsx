@@ -7,6 +7,7 @@ import toast from "react-hot-toast";
 import { useSession } from "@/lib/auth-client";
 import { Product } from "@/lib/types";
 import { formatPrice, unitLabel } from "@/lib/utils";
+import ProductDetailSkeleton from "@/components/ProductDetailSkeleton";
 
 export default function ProductDetailClient() {
   const params = useParams();
@@ -97,38 +98,8 @@ export default function ProductDetailClient() {
     load();
   }, [slug]);
 
-  if (isPending || !session) {
-    return (
-      <div className="max-w-4xl mx-auto px-4 py-16 flex items-center justify-center">
-        <div className="w-8 h-8 border-4 border-[#047F39] border-t-transparent rounded-full animate-spin" />
-      </div>
-    );
-  }
-
-  if (loading) {
-    return (
-      <div className="max-w-4xl mx-auto px-4 sm:px-6 lg:px-8 py-8 animate-pulse">
-        <div className="bg-white rounded-2xl p-8 border border-gray-100 mb-6">
-          <div className="flex items-center gap-6">
-            <div className="w-20 h-20 bg-gray-200 rounded-2xl" />
-            <div className="flex-1">
-              <div className="h-7 bg-gray-200 rounded w-48 mb-3" />
-              <div className="h-4 bg-gray-100 rounded w-64" />
-            </div>
-          </div>
-        </div>
-        <div className="grid grid-cols-3 gap-4 mb-6">
-          {[1, 2, 3].map((i) => (
-            <div key={i} className="bg-white rounded-2xl p-6 border border-gray-100 h-24" />
-          ))}
-        </div>
-        <div className="bg-white rounded-2xl p-6 border border-gray-100 space-y-3">
-          {[1, 2, 3, 4, 5].map((i) => (
-            <div key={i} className="h-12 bg-gray-100 rounded-xl" />
-          ))}
-        </div>
-      </div>
-    );
+  if (isPending || !session || loading) {
+    return <ProductDetailSkeleton />;
   }
 
   if (notFound || !product) {
