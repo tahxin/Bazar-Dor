@@ -1,36 +1,62 @@
-This is a [Next.js](https://nextjs.org) project bootstrapped with [`create-next-app`](https://nextjs.org/docs/app/api-reference/cli/create-next-app).
+# বাজার দর / BazarDor
 
-## Getting Started
+বাজার দর (BazarDor) হলো বাংলাদেশের নিত্যপ্রয়োজনীয় পণ্যের দৈনন্দিন বাজারদর পর্যবেক্ষণ ও তুলনামূলক বিশ্লেষণের একটি আধুনিক প্ল্যাটফর্ম। চাল, ডাল, তেল, সবজি, মাছ, মাংস, ডিম ও মসলার নির্ভরযোগ্য ও আপ-টু-ডেট বাজারদর সহজেই এক নজরে পাওয়া যায়।
 
-First, run the development server:
+---
 
+## 🛠️ ব্যবহৃত প্রযুক্তিসমূহ (Technologies Used)
+
+- **Next.js 16 (App Router)**: আধুনিক ও দ্রুতগতির ফুলস্ট্যাক ফ্রেমওয়ার্ক
+- **TypeScript**: টাইপ-নিরাপদ ও নির্ভরযোগ্য কোডবেজ
+- **Tailwind CSS & DaisyUI**: মার্জিত, রেসপন্সিভ এবং আধুনিক ডিজাইন
+- **BetterAuth**: সুরক্ষিত অথেন্টিকেশন সিস্টেম (ইমেল/পাসওয়ার্ড ও সোশ্যাল ওঅথ)
+- **MongoDB & MongoDB Adapter**: ইউজার ডেটা সংরক্ষণের জন্য ডেটাবেস
+- **React Hot Toast**: সুন্দর ও প্রতিক্রিয়াশীল নোটিফিকেশন সিস্টেম
+
+---
+
+## ✨ প্রধান ৫টি বৈশিষ্ট্য (Key Features)
+
+1. **রিয়েল-টাইম বাজারদর ও মারকুই প্রাইস টিকার (Live Price Ticker & Market Insights)**  
+   হেডারে চলমান ইনফিনিট মারকুই টিকারে পণ্যের আজকের দর এবং উত্থান-পতনের হার (▲ / ▼) তাৎক্ষণিকভাবে দেখা যায়।
+
+2. **উত্থান-পতন ও সব পণ্যের বিভাগ (Top Risers, Fallers & All Products)**  
+   হোম পেজে আজ দাম বেড়েছে ও আজ দাম কমেছে এমন শীর্ষ পণ্যের পৃথক সেকশন এবং সব পণ্যের বিস্তারিত তালিকা প্রদর্শিত হয়।
+
+3. **বিভাগভিত্তিক ব্রাউজিং ও সংখ্যাভিত্তিক সর্টিং (Categorized Navigation & Numeric Sorting)**  
+   চাল, ডাল, তেল ইত্যাদি ক্যাটাগরিভিত্তিক ফিল্টারিং এবং দাম অনুযায়ী (কম থেকে বেশি, বেশি থেকে কম) নির্ভুল নিউমেরিক সর্টিং সুবিধা।
+
+4. **বাজারভিত্তিক মূল্য বিশ্লেষণ ও ইতিহাস (Market-wise Breakdown & Historical Trends)**  
+   প্রতিটি পণ্যের সর্বনিম্ন, সর্বাধিক এবং গড় মূল্য এবং ঢাকা, চট্টগ্রামসহ বিভিন্ন বিভাগের বাজারভিত্তিক দামের পুঙ্খানুপুঙ্খ বিবরণ।
+
+5. **সুরক্ষিত অথেন্টিকেশন ও প্রোফাইল আপডেট (BetterAuth, MongoDB & Profile Management)**  
+   লগইন, রেজিস্ট্রেশন ও সোশ্যাল লগইনের সুবিধা এবং ব্যবহারকারীর নাম ও প্রোফাইল তথ্য সরাসরি আপডেটের ব্যবস্থা।
+
+---
+
+## 🚀 সেটআপ ও ইনস্টলেশন (Getting Started)
+
+### ১. ডিপেন্ডেন্সি ইনস্টল করুন
 ```bash
-npm run dev
-# or
-yarn dev
-# or
-pnpm dev
-# or
-bun dev
+npm install
 ```
 
-Open [http://localhost:3000](http://localhost:3000) with your browser to see the result.
+### ২. এনভায়রনমেন্ট ভেরিয়েবল সেটআপ
+প্রজেক্টের রুট ডিরেক্টরিতে `.env` ফাইলটিতে আপনার ক্রেডেনশিয়াল প্রদান করুন:
+```env
+MONGODB_URI=your_mongodb_connection_string
+BETTER_AUTH_SECRET=your_better_auth_secret
+BETTER_AUTH_URL=http://localhost:3000
+NEXT_PUBLIC_APP_URL=http://localhost:3000
+GOOGLE_CLIENT_ID=your_google_client_id
+GOOGLE_CLIENT_SECRET=your_google_client_secret
+GITHUB_CLIENT_ID=your_github_client_id
+GITHUB_CLIENT_SECRET=your_github_client_secret
+```
 
-You can start editing the page by modifying `app/page.tsx`. The page auto-updates as you edit the file.
+### ৩. ডেভেলপমেন্ট সার্ভার চালু করুন
+```bash
+npm run dev
+```
 
-This project uses [`next/font`](https://nextjs.org/docs/app/building-your-application/optimizing/fonts) to automatically optimize and load [Geist](https://vercel.com/font), a new font family for Vercel.
-
-## Learn More
-
-To learn more about Next.js, take a look at the following resources:
-
-- [Next.js Documentation](https://nextjs.org/docs) - learn about Next.js features and API.
-- [Learn Next.js](https://nextjs.org/learn) - an interactive Next.js tutorial.
-
-You can check out [the Next.js GitHub repository](https://github.com/vercel/next.js) - your feedback and contributions are welcome!
-
-## Deploy on Vercel
-
-The easiest way to deploy your Next.js app is to use the [Vercel Platform](https://vercel.com/new?utm_medium=default-template&filter=next.js&utm_source=create-next-app&utm_campaign=create-next-app-readme) from the creators of Next.js.
-
-Check out our [Next.js deployment documentation](https://nextjs.org/docs/app/building-your-application/deploying) for more details.
+ব্রাউজারে [http://localhost:3000](http://localhost:3000) ওপেন করে প্রজেক্টটি দেখুন।
