@@ -5,7 +5,7 @@ import { NavUserProfile } from "./NavUserProfile";
 import NavLinks from "./NavLinks";
 import PriceTicker from "./PriceTicker";
 import { fetchCategories, fetchAllProducts } from "@/lib/api";
-import HeaderDate from "./HeaderDate";
+import HeaderDate from "@/components/HeaderDate";
 
 export default async function Header() {
   const [categories, products] = await Promise.all([
