@@ -2,6 +2,7 @@ import HeroSection from "@/components/HeroSection";
 import Header from "../components/Header";
 import UpTickProducts from "@/components/UpTickProducts";
 import DownTickProducts from "@/components/DownTickProducts";
+import AllProducts from "@/components/AllProducts";
 
 export default function Home() {
   return (
@@ -11,6 +12,9 @@ export default function Home() {
         <HeroSection />
         <UpTickProducts />
         <DownTickProducts />
+        <section id="all-products">
+          <AllProducts />
+        </section>
       </main>
     </div>
   );

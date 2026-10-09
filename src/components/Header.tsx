@@ -1,14 +1,22 @@
 "use client";
+
 import Image from "next/image";
-import React from "react";
+import { useEffect, useState } from "react";
 import { NavUserProfile } from "./NavUserProfile";
 import NavLinks from "./NavLinks";
 import Link from "next/link";
 
 const Header = () => {
-  const date = new Date().toLocaleDateString("bn-BD", {
-    dateStyle: "full",
-  });
+  const [date, setDate] = useState("");
+
+  useEffect(() => {
+    setDate(
+      new Date().toLocaleDateString("bn-BD", {
+        dateStyle: "full",
+      }),
+    );
+  }, []);
+
   return (
     <header>
       <div className="flex items-center justify-between px-4 py-2">
@@ -23,9 +31,10 @@ const Header = () => {
               height={100}
             />
           </Link>
+
           <div>
             <Link href="/">বাজার দর</Link>
-            <div>{date}</div>
+            <div>{date || "তারিখ লোড হচ্ছে..."}</div>
           </div>
         </div>
 
@@ -33,6 +42,7 @@ const Header = () => {
           <NavUserProfile />
         </div>
       </div>
+
       <NavLinks />
     </header>
   );
