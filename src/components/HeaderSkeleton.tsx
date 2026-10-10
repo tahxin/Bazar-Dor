@@ -1,5 +1,4 @@
 import Link from "next/link";
-import Image from "next/image";
 
 export default function HeaderSkeleton() {
   return (
@@ -7,15 +6,12 @@ export default function HeaderSkeleton() {
       <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
         <div className="flex items-center justify-between py-2">
           <div className="flex items-center gap-2.5">
-            <Link href="/" className="shrink-0">
-              <Image
-                src="/logo-icon.png"
-                alt="বাজার দর"
-                width={40}
-                height={40}
-                className="rounded-xl"
-                priority
-              />
+            <Link
+              href="/"
+              className="shrink-0 w-10 h-10 rounded-xl bg-[#047F39] flex items-center justify-center text-xl shadow-xs"
+              aria-label="বাজার দর"
+            >
+              <span>🛒</span>
             </Link>
             <div>
               <span className="text-lg font-extrabold text-gray-900 leading-none">

@@ -1,5 +1,4 @@
 import { Suspense } from "react";
-import Image from "next/image";
 import Link from "next/link";
 import { NavUserProfile } from "./NavUserProfile";
 import NavLinks from "./NavLinks";
@@ -18,22 +17,18 @@ export default async function Header() {
       <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
         <div className="flex items-center justify-between py-2">
           <div className="flex items-center gap-2.5">
-            <Link href="/" className="shrink-0">
-              <Image
-                src="/logo-icon.png"
-                alt="বাজার দর"
-                loading="eager"
-                priority
-                width={40}
-                height={40}
-                className="rounded-xl"
-              />
+            <Link
+              href="/"
+              className="shrink-0 w-10 h-10 rounded-xl bg-[#047F39] flex items-center justify-center text-xl shadow-xs hover:bg-[#036B30] transition-colors"
+              aria-label="বাজার দর"
+            >
+              <span>🛒</span>
             </Link>
             <div>
               <Link href="/" className="text-lg font-extrabold text-gray-900 leading-none">
                 বাজার দর
               </Link>
-              <Suspense fallback={<p className="text-xs text-gray-400 font-medium leading-tight h-4" />}>
+              <Suspense fallback={<p className="text-xs text-gray-400 font-medium leading-tight h-4" suppressHydrationWarning />}>
                 <HeaderDate />
               </Suspense>
             </div>

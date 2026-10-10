@@ -17,8 +17,8 @@ export default function BannerDate() {
       className="inline-flex items-center gap-1.5 text-xs font-semibold tracking-wide text-[#047F39] bg-[#e0f2e9] px-3 py-1 rounded-full mb-4"
       suppressHydrationWarning
     >
-      <span>📅</span>
-      <span>{date || "আজকের তারিখ"}</span>
+      <span suppressHydrationWarning>📅</span>
+      <span suppressHydrationWarning>{date || "আজকের তারিখ"}</span>
     </span>
   );
 }

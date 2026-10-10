@@ -6,9 +6,7 @@ export default function Footer() {
       <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-6">
         <div className="flex flex-col sm:flex-row items-start sm:items-center justify-between gap-4">
           <div>
-            <Link href="/" className="text-sm font-bold text-gray-800">
-              বাজার দর
-            </Link>
+            
             <p className="text-xs text-gray-500 mt-0.5">
               প্রয়োজনীয় পণ্যের দাম এক নজরে।
             </p>

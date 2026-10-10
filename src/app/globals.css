@@ -2,3 +2,16 @@
 @plugin "daisyui";
 
 @import "@heroui/styles";
+
+@keyframes ticker {
+  0% {
+    transform: translateX(0);
+  }
+  100% {
+    transform: translateX(-50%);
+  }
+}
+
+.ticker-track:hover {
+  animation-play-state: paused;
+}

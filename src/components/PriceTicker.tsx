@@ -45,16 +45,6 @@ export default function PriceTicker({ products }: Props) {
           </span>
         ))}
       </div>
-
-      <style jsx>{`
-        @keyframes ticker {
-          0% { transform: translateX(0); }
-          100% { transform: translateX(-50%); }
-        }
-        .ticker-track:hover {
-          animation-play-state: paused;
-        }
-      `}</style>
     </div>
   );
 }
