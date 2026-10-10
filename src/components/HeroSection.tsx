@@ -6,7 +6,7 @@ import Image from "next/image";
 export default function HeroSection() {
   return (
     <section className="bg-linear-to-br from-[#f0faf4] to-[#e8f5ed] rounded-3xl my-6 px-8 py-12 flex flex-col lg:flex-row-reverse items-center gap-10 border border-[#d0ead8]">
-      <div className="shrink-0 flex items-center justify-center w-full max-w-[480px]">
+      <div className="shrink-0 flex items-center justify-center w-full max-w-120">
         <Image
           src="/bazar-hero.png"
           alt="Hero Image"
