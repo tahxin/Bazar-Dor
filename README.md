@@ -172,7 +172,7 @@ Open [http://localhost:3000](http://localhost:3000) in your browser.
 
 ---
 
-## 📜 Available NPM Scripts
+##  Available NPM Scripts
 
 - `npm run dev`: Starts the Next.js development server with Turbopack on port `3000`.
 - `npm run build`: Compiles the application and generates the optimized production build.
